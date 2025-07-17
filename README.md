@@ -14,5 +14,4 @@ PyTorch ve torchvision paketlerini kurmak için:
 - CNN-test.py çalıştırmak eğitilmiş modeli alır ve test eder, 10 yanış tahmini gösterir.
 - Modelin yapısı simple_cnn.py içerisinde değiştirilebilir.
 
-- 
 
