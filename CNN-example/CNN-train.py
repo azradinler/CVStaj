@@ -78,7 +78,7 @@ val_accuracies = []
 if not os.path.exists('models'):
     os.makedirs('models')
 
-print("Training Starts...")
+print("Eğitim Başlıyor...")
 print("************")
 
 for epoch in range(num_epochs):
