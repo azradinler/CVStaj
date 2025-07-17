@@ -1,12 +1,12 @@
 ## Gereksinimler
 
 - Python 3.8 veya üzeri
-- PyTorch (https://pytorch.org/get-started/locally/)  
+- PyTorch 
 - torchvision
 - matplotlib (Yanlış tahminlerin görselleşirilmesinde)
 
 PyTorch ve torchvision paketlerini kurmak için:
-[PyTorch Kurulum Sayfası](https://pytorch.org/get-started/locally/)
+[PyTorch Kurulum](https://pytorch.org/get-started/locally/)
 
 ## Kullanım
 
