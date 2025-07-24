@@ -1,44 +1,38 @@
-\# Hakkında
+# Hakkında
 
 Bu proje, video veya görsellerde insan tespiti, takibi ve temel poz (duruş) tahmini yapabilen bir Python uygulamasıdır. Ultralytics YOLOv8 ve pose modelleri ile çalışır. İnsanları tespit edip her bir kişiyi takip eder, ayrıca kişinin ayakta, oturuyor, yürüyor veya koşuyor gibi temel pozlarını tahmin etmeye çalışır
 
 
 
-\## Temel Özellikler
+## Temel Özellikler
 
-\- İnsan tespiti ve takibi
+- İnsan tespiti ve takibi
 
-\- Kişi başına ID atama
+- Kişi başına ID atama
 
-\- Temel poz (ayakta, oturuyor, yürüyor, koşuyor) tahmini
+- Temel poz (ayakta, oturuyor, yürüyor, koşuyor) tahmini
 
-\- Sonuçların ekranda kutu ve anahtar noktalarla gösterimi
-
-
-
-\## Ana Dosyalar
-
-\- `humantrack.py`: Sadece insan tespiti ve takibi
-
-\- `posetrack.py`: İnsan tespiti, takibi ve poz tahmini
-
-\- `persontracker.py`: İnsan + poz takipçi sınıflarını içeren dosya
-
-\- 
+- Sonuçların ekranda kutu ve anahtar noktalarla gösterimi
 
 
 
-\## Gereksinimler
+## Ana Dosyalar
+
+- `humantrack.py`: Sadece insan tespiti ve takibi
+
+- `posetrack.py`: İnsan tespiti, takibi ve poz tahmini
+
+- `persontracker.py`: İnsan + poz takipçi sınıflarını içeren dosya
+  
+## Gereksinimler
+
+- PyTorch 
+
+[PyTorch Kurulum](https://pytorch.org/get-started/locally/)
 
 
 
-\- PyTorch 
-
-\[PyTorch Kurulum](https://pytorch.org/get-started/locally/)
-
-
-
-\## Kullanım
+## Kullanım
 
 Sadece insan takibi için:
 
