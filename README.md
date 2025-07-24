@@ -1,67 +1,104 @@
 # CVStaj
- 
-Classification:
-- Görüntülere veya bölgelere etiketler atar
-- Görüntü içeriğinin kapsamlı bir şekilde anlaşılmasını sağlar
-- Görüntü etiketleme ve etiketlemeyi etkinleştirir
+# 🧠 Görüntü İşleme ve YOLO Algoritması
 
-Object Detection:
-- Belirli nesneleri ve konumlarını tanımlar 
-- Hassas nesne yerelleştirmesi için sınırlayıcı kutular kullanır 
-- Video gözetimi ve güvenlik izlemeyi etkinleştirir 
-- Tarımda ürün izleme ve zararlı tespiti için yardımcı olur 
+## 📌 Sınıflandırma (Classification)
+- Görüntülere veya bölgelere etiketler atar.
+- Görüntü içeriğinin kapsamlı bir şekilde anlaşılmasını sağlar.
+- Görüntü etiketleme ve etiketlemeyi etkinleştirir.
 
-Segmentation:
-- Nesne sınırları ve bölgeleri hakkında ayrıntılı bilgi sağlar
-                                                       
-Yolo 
-Her bir ızgara kendi içinde, alanda nesnenin olup olmadığını, varsa orta noktasının içinde olup olmadığını, orta noktası da içindeyse uzunluğunu, yüksekliğini ve hangi sınıftan olduğunu bulmakla sorumlu. 
- 
-Buna göre YOLO her ızgara için ayrı bir tahmin vektörü oluşturur. Bunların her birinin içinde:
-Güven skoru: Bu skor modelin geçerli ızgara içinde nesne bulunup bulunmadığından ne kadar emin olduğunu gösterir. (0 ise kesinlikle yok 1 ise kesinlikle var) Eğer nesne olduğunu düşünürse de bu nesnenin gerçekten o nesne olup olmadığından ve etrafındaki kutunun koordinatlarından ne kadar emin olduğunu gösterir.
-Bx: Nesnenin orta noktasının x koordinatı
-By: Nesnenin orta noktasının y koordinatı
-Bw: Nesnenin genişliği
-Bh: Nesnenin yüksekliği
-Bağlı Sınıf Olasılığı: Modelimizde kaç farklı sınıf varsa o kadar sayıda tahmin değeri. 
-Güven skoru = Kutu Güven Skoru x Bağlı Sınıf Olasılığı
-Kutu Güven Skoru = P(nesne) . IoU
-P(nesne) = Kutunun nesneyi kapsayıp kapsamadığının olasılığı. (Yani nesne var mı yok mu?)
-IoU = Ground truth ile tahmin edilmiş kutu arasındaki IoU değeri
+---
 
-YOLO Algoritması Açıklaması
-YOLO (You Only Look Once) algoritması, giriş görüntüsünü SxS boyutunda grid (ızgara) hücrelerine böler. Her bir grid hücresi, potansiyel olarak bir veya birden fazla bounding box (sınırlayıcı kutu) ve bu kutuların güvenirlik skorlarını (confidence) tahmin eder. Aynı zamanda her grid hücresi için sınıf olasılıkları (class probability map) da oluşturulur. Bu yapı, üst üste binen nesnelerin daha doğru tespiti için önemlidir.
-Her grid hücresi:
-•	Bir veya birden fazla bounding box (x, y koordinatları, genişlik ve yükseklik dahil),
-•	Bu kutulara ait confidence skorları,
-•	Ve sınıf olasılıklarını üretir.
-YOLO algoritması, bu görevleri CNN (Convolutional Neural Network) tabanlı bir mimari ile gerçekleştirir.
- 
-Anchor box, YOLO gibi nesne tespit algoritmalarında, önceden tanımlanmış kutu şablonlarıdır. Bu kutular, görüntüdeki farklı nesne boyutlarını ve oranlarını daha iyi tespit edebilmek için kullanılır.
- Her grid hücresine birden fazla anchor box atanır (örneğin 3 adet).
-Bu anchor box'lar, önceden analiz edilmiş veri setine göre farklı en-boy oranlarına (aspect ratio) sahiptir.
-Model, her anchor box üzerinden:
-•	Nesne olup olmadığını (objectness score),
-•	Sınıfını (class probability),
-•	Anchor box'a göre pozisyon düzeltmesini (x, y, w, h) tahmin eder.
-Eğitim sırasında, nesneye en yakın anchor box seçilir (IoU en yüksek olan) ve geri kalanı göz ardı edilir.
-Kutu Koordinatları ve Tespit Süreci
-•	Bounding box koordinatları, her kutunun merkez noktası baz alınarak hesaplanır. Kutu genişliği ve yüksekliği bu merkeze göre belirlenir.
-•	Nesne tespiti için yalnızca merkez noktası bir grid hücresine düşen kutular dikkate alınır. Diğer hücreler için tahminler sıfır (0) olarak kabul edilir.
-•	Son olarak, tespit edilen kutular üzerinde IoU (Intersection over Union) skoru hesaplanarak, önceden belirlenmiş bir eşik değer (threshold) ile karşılaştırma yapılır. Böylece en güvenilir kutular seçilir ve tespit sonuçları oluşturulur.
+## 📌 Nesne Tespiti (Object Detection)
+- Belirli nesneleri ve konumlarını tanımlar.
+- Hassas nesne yerelleştirmesi için sınırlayıcı kutular (bounding box) kullanılır.
+- Video gözetimi ve güvenlik izlemeyi etkinleştirir.
+- Tarımda ürün izleme ve zararlı tespiti için kullanılır.
 
-Versiyonlar Arası Farklar
-YOLOv1: Her grid hücresi yalnızca tek nesne için tahmin yapabilir. Eğer bir hücrede birden fazla nesne varsa bu durum performans kaybına neden olur.
-YOLOv3 ve sonrası: Multilabel sınıflandırmayı destekler. Örneğin bir nesne hem "animal" hem de "dog" olarak etiketlenebilir. Bu, daha karmaşık sınıflandırma senaryolarında avantaj sağlar.anchor based. Nesne kutu tespiti Bounding box ,IoU tababnlı filtreleme.
-YOLOv8:Anchor free .Nesne kutu tespiti IoU +NMS + Confidence threshold 
+![Object Detection](images/object_detection.png)
 
-YOLO  ile insan tespiti 
-YOLO, bir görüntüyü tek seferde (tek bakışta) analiz ederek içerisinde bulunan nesneleri ve konumlarını tahmin eder. Özellikle "person" sınıfı, yaygın veri setleri (örneğin COCO) içinde önemli bir sınıftır ve bu sayede insan tespiti için oldukça etkilidir.
-Sınıf olasılıklarını tahmin eder (örneğin: insan, araba, kedi vb.).
-Bounding box (x, y, w, h) değerlerini ve güven skorunu tahmin eder.
-Filtreleme Uygular:
-Belirli bir eşik değerinden düşük skorlar elenir.
-Aynı kişiye ait birden fazla kutuyu engellemek için NMS (Non-Maximum Suppression) uygulanır.
-Sonuç: Tespit edilen insanlara ait kutular ve sınıf etiketleri çıktı olarak verilir.
+---
 
+## 📌 Segmentasyon (Segmentation)
+- Nesne sınırları ve bölgeleri hakkında ayrıntılı bilgi sağlar.
 
+![Segmentation](images/segmentation.png)
+
+---
+
+## ⚙️ YOLO (You Only Look Once) Algoritması
+
+YOLO algoritması, görüntüyü `S x S` boyutlarında ızgaralara böler. Her ızgara hücresi:
+- Nesne olup olmadığını tespit eder.
+- Orta noktası içindeyse `x`, `y`, `w`, `h` koordinatlarını tahmin eder.
+- Sınıf olasılıklarını üretir.
+
+### 🔢 Tahmin Vektörü İçeriği:
+- **Güven skoru (Confidence Score):** Nesne varlığına olan güven.
+- **Bx:** Nesne orta noktasının X koordinatı.
+- **By:** Nesne orta noktasının Y koordinatı.
+- **Bw:** Nesne genişliği.
+- **Bh:** Nesne yüksekliği.
+- **Bağlı sınıf olasılıkları:** Her sınıf için bir olasılık değeri.
+
+🔹 **Güven skoru** = `Kutu Güven Skoru` × `Bağlı Sınıf Olasılığı`  
+🔹 `Kutu Güven Skoru` = `P(nesne)` × `IoU`  
+🔹 `P(nesne)` = Nesne içerip içermediği olasılığı  
+🔹 `IoU` = Tahmin kutusu ile gerçek kutu arasındaki örtüşme oranı
+
+![YOLO Grid](images/yolo_grid.png)
+
+---
+
+## 🛠️ YOLO Algoritmasının Adımları
+1. Girdi görüntüsü `S x S` grid hücrelerine ayrılır.
+2. Her hücre:
+   - 1 veya daha fazla bounding box üretir.
+   - Confidence score verir.
+   - Sınıf olasılıkları çıkarır.
+3. CNN tabanlı mimari ile çalışır.
+
+---
+
+## 📦 Anchor Box Nedir?
+
+YOLO'da farklı boyutlardaki nesneleri tespit etmek için kullanılan sabit kutu şablonlarıdır.
+
+- Her hücreye birden fazla anchor box atanır (örneğin 3 tane).
+- Her anchor box:
+  - Nesne skoru (objectness)
+  - Sınıf olasılığı
+  - Konum düzeltmesi tahmin eder (`x`, `y`, `w`, `h`)
+- Eğitimde, nesneye en uygun anchor box seçilir (IoU değeri en yüksek olan).
+
+![Anchor Boxes](images/anchor_boxes.png)
+
+---
+
+## 📏 Kutu Koordinatları ve Tespit Süreci
+
+- Bounding box koordinatları kutu merkezine göre hesaplanır.
+- Sadece merkezi bir grid hücresine düşen kutular dikkate alınır.
+- Tespit sonrası IoU hesaplanarak güvenilirlik eşik değeriyle karşılaştırılır.
+- En iyi kutular seçilerek sonuçlar elde edilir.
+
+![Bounding Box](images/bounding_box.png)
+
+---
+
+## 🔄 YOLO Sürümleri Arasındaki Farklar
+
+| Versiyon  | Özellikler |
+|-----------|------------|
+| YOLOv1    | Her grid hücresi yalnızca tek nesne tahmin edebilir. Çok nesneli sahnelerde düşük performans. |
+| YOLOv3+   | Multi-label destekler. Nesne birden fazla sınıfa ait olabilir (örneğin hem "animal" hem "dog"). Anchor-based mimari. |
+| YOLOv8    | Anchor-free mimari. Tespit için IoU + NMS + confidence threshold kullanılır. |
+
+---
+
+## 🚶‍♂️ YOLO ile İnsan Tespiti
+
+YOLO, insan tespiti gibi gerçek zamanlı uygulamalarda sıkça kullanılır.
+
+![Human Detection](images/human_detection.png)
+
+---
