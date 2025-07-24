@@ -1,5 +1,5 @@
-# Proje Hakkında
-Bu proje, video veya görsellerde insan tespiti, takibi ve temel poz (duruş) tahmini yapabilen bir Python uygulamasıdır. Ultralytics YOLOv8 ve pose modelleri ile çalışır. İnsanları tespit edip her bir kişiyi takip eder, ayrıca kişinin ayakta, oturuyor, yürüyor veya koşuyor gibi temel pozlarını tahmin edebilir.
+#Hakkında
+Bu proje, video veya görsellerde insan tespiti, takibi ve temel poz (duruş) tahmini yapabilen bir Python uygulamasıdır. Ultralytics YOLOv8 ve pose modelleri ile çalışır. İnsanları tespit edip her bir kişiyi takip eder, ayrıca kişinin ayakta, oturuyor, yürüyor veya koşuyor gibi temel pozlarını tahmin etmeye çalışır
 
 ## Temel Özellikler
 - İnsan tespiti ve takibi
