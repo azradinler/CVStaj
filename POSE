@@ -1,0 +1,26 @@
+1. 📌 Pose Estimation Nedir?
+Pose estimation, bir insanın veya nesnenin anahtar eklem noktalarının (keypoints) tespiti ile iskelet benzeri bir yapı çıkarmaktır. Bu yapının amacı:
+Kişinin duruşunu anlamak
+Hareketlerini analiz etmek
+Vücut şeklini çıkarıp çeşitli uygulamalarda kullanmaktır
+
+
+3. 🧭 Pose Estimation Türleri
+🔹 2D Pose Estimation
+Sadece (x, y) koordinatları kullanılır. Daha yaygın ve hızlıdır.
+🔹 3D Pose Estimation
+Noktalara (z) ekseni de eklenir, bu da derinlik bilgisi sunar.
+🔹 Top-Down vs Bottom-Up Yöntemi:
+Top-Down: Önce kişi tespiti yapılır (person bounding box), sonra o kişiye keypoint işlemi uygulanır.
+Bottom-Up: Tüm görüntüde keypoint’ler çıkarılır, sonra bu noktalar kişilere bağlanır.
+
+
+. 🧪 Uygulama Senaryoları:
+Fitness ve Spor Takibi: Hareketin doğru yapılıp yapılmadığını analiz eder.
+Animasyon ve Oyunlar: Hareket yakalama (motion capture)
+Sağlık ve Rehabilitasyon: Duruş bozuklukları izlenebilir.
+Güvenlik ve İzleme: Şüpheli davranış tespiti
+Dans ve Sanat: Hareketleri eşleştirme, stil değerlendirme
+
+
+
