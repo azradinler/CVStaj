@@ -4,8 +4,8 @@ Bunlardan en yaygın olanları sınıflandırma (classification), nesne tespiti 
 segmentasyon (segmentation) görevleridir. Her bir görev, görüntüdeki bilgiyi farklı şekilde 
 yorumlamayı amaçlar. Bu görevlerin farklarını anlamak, hangi problemde hangi yaklaşımın 
 kullanılacağına karar vermek açısından oldukça önemlidir. 
-�
-�
+
+
  1. Sınıflandırma (Classification) 
 Sınıflandırma, bir görüntünün neye ait olduğunu belirlemeye yönelik bir işlemdir. Örneğin, 
 elimizde bir hayvan fotoğrafı varsa ve bu fotoğrafın bir "kedi" mi yoksa "köpek" mi olduğunu 
@@ -18,24 +18,20 @@ anlamaya çalışıyorsak, bu bir sınıflandırma problemidir.
 ● El yazısı rakam tanıma 
 ● Tıbbi görüntülerde hastalık teşhisi 
 ● Sosyal medya fotoğraflarının içerik sınıflandırması 
-�
-�
+
  2. Nesne Tespiti (Detection) 
 Nesne tespiti, bir görüntüde birden fazla nesne olup olmadığını ve bunların nerede 
 bulunduğunu belirleme işidir. Sistem, hem her nesnenin ne olduğunu (etiket), hem de 
 görüntü üzerindeki konumunu (genellikle dikdörtgen kutularla) belirtir. 
 ● Örneğin: Bir sokak görüntüsünde hem “insan” hem “araba” tespit edilip, her biri 
 kutularla işaretlenir. 
-● 
-görevde konum bilgisi çok önemlidir. 
-Bu 
-✅
+
+
  Uygulama Alanları: 
 ● Güvenlik kameralarında kişi takibi 
 ● Otonom araçlarda yayaların tespiti 
 ● Barkod veya nesne tanıma sistemleri 
-�
-�
+
  3. Segmentasyon (Segmentation) 
 Segmentasyon, bir görüntüdeki her bir pikselin hangi nesneye ait olduğunu belirleme 
 işlemidir. Yani, sadece nesnelerin yerini değil, tam sınırlarını da öğrenmek isteriz. 
@@ -66,8 +62,7 @@ olup olmadığını kontrol eder ve varsa, nesnenin koordinatlarını ve sınıf
 ○ Kolay kullanım: model.predict(), model.train() gibi. 
 ○ Segmentasyon ve sınıflandırma için de kullanılabilir. 
 ○ Ultralytics resmi destek veriyor. 
-�
-�
+
  YOLO’nun Temel Adımları: 
 1. Girdiyi sabit boyutlu (örneğin 416x416) olarak alır. 
 2. Görüntüyü S x S'lik bir grid'e böler. 
@@ -85,8 +80,7 @@ Her hücre şunları tahmin eder:
 ● Confidence score: O kutunun gerçekten bir nesne içerip içermediğini belirten olasılık 
 ● Sınıf tahmini: Kutunun hangi nesneye ait olduğu (örneğin: insan, araba, köpek vs.) 
 ○  
-�
-�
+
  Anchor Boxes 
 ● Farklı şekil ve boyutlardaki nesneleri daha iyi temsil etmek için sabit kutu 
 şablonlarıdır. 
@@ -98,8 +92,7 @@ sayede:
 ● Eğitim süreci hızlanır. 
 ● Daha az ayarlama gerektirir. 
 ● Küçük veri setlerinde daha iyi performans gösterir. 
-�
-�
+
  Bu Hatalı Tahminin Nedenleri: 
 1. Modelin Eğitim Verisi Sınırlı 
 ● YOLOv8’in varsayılan modeli (yolov8n.pt) COCO dataset ile eğitilmiştir. 
