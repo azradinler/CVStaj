@@ -1,0 +1,32 @@
+egmentasyon, görüntü işleme ve bilgisayarla görme alanında bir görüntüyü anlamlı parçalara ayırma işlemidir. Bu işlem sayesinde her pikselin hangi nesneye ait olduğu belirlenir. Segmentasyonun ana amacı, bir görüntüdeki farklı nesneleri ve bölgeleri piksel düzeyinde ayırmaktır.
+1.Semantic segmentation her pikselin hangi sınıfa ait olduğunu söyler. Ancak aynı sınıfa ait farklı nesneleri ayırt etmez.
+Örneğin:
+Bir görüntüde 3 farklı köpek varsa, semantic segmentation bunların hepsini sadece "köpek" olarak etiketler.
+
+
+🔷 Özellikler:
+Piksel bazlı sınıflandırma yapılır.
+
+
+Aynı sınıfa ait nesneler arasında ayrım yapılmaz.
+2.3. Instance Segmentation Nedir?
+Instance segmentation, semantic segmentation'ın bir adım ötesidir. Bu yöntem hem piksel bazlı sınıf bilgisini verir hem de aynı sınıfa ait nesneleri tek tek ayırt eder.
+Örneğin:
+Görüntüdeki 3 köpek hem "köpek" sınıfı olarak etiketlenir, hem de Köpek-1, Köpek-2, Köpek-3 olarak ayrılır.
+
+
+🔶 Özellikler:
+Her nesne örneği (instance) ayrı ayrı maskelenir.
+
+
+Çok daha detaylı bilgi sağlar.
+
+
+ 4. Mask Nedir?
+Mask, görüntünün hangi piksellerinin belirli bir nesneye ait olduğunu gösteren ikili (binary) bir haritadır.
+Piksel değeri 1 (veya beyaz): Nesneye ait.
+
+
+Piksel değeri 0 (veya siyah): Nesneye ait değil.
+Smantic segmentation için mask:Her sınıf için ayrı bir mask olabilir.
+Instance segmentation için mask: Her bir nesne için ayrı ayrı maskler üretilir
