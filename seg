@@ -1,4 +1,4 @@
-egmentasyon, görüntü işleme ve bilgisayarla görme alanında bir görüntüyü anlamlı parçalara ayırma işlemidir. Bu işlem sayesinde her pikselin hangi nesneye ait olduğu belirlenir. Segmentasyonun ana amacı, bir görüntüdeki farklı nesneleri ve bölgeleri piksel düzeyinde ayırmaktır.
+segmentasyon, görüntü işleme ve bilgisayarla görme alanında bir görüntüyü anlamlı parçalara ayırma işlemidir. Bu işlem sayesinde her pikselin hangi nesneye ait olduğu belirlenir. Segmentasyonun ana amacı, bir görüntüdeki farklı nesneleri ve bölgeleri piksel düzeyinde ayırmaktır.
 1.Semantic segmentation her pikselin hangi sınıfa ait olduğunu söyler. Ancak aynı sınıfa ait farklı nesneleri ayırt etmez.
 Örneğin:
 Bir görüntüde 3 farklı köpek varsa, semantic segmentation bunların hepsini sadece "köpek" olarak etiketler.
