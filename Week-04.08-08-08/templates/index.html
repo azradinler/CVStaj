@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kimlik Tanımlama</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Kimlik Tanımlama</h1>
+        
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">📷</div>
+            <div class="upload-text">Kimlik fotoğrafınızı buraya sürükleyin veya tıklayarak seçin.</div>
+        </div>
+        
+        <input type="file" id="fileInput" class="file-input" accept="image/*">
+        
+        <button class="btn" id="uploadBtn" disabled>Analiz Et</button>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Analiz ediliyor ...</p>
+        </div>
+        
+        <img id="preview" class="preview">
+        
+        <div class="result" id="result"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html> 
