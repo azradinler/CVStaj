@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .start-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .start-btn:hover {
+            background-color: #45a049;
+        }
+        .stop-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        .stop-btn:hover {
+            background-color: #da190b;
+        }
+        .reports-btn {
+            background-color: #2196F3;
+            color: white;
+        }
+        .reports-btn:hover {
+            background-color: #0b7dda;
+        }
+        .video-container {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            align-items: flex-start;
+        }
+        .main-video {
+            flex: 2;
+            text-align: center;
+        }
+        .heatmap-panel {
+            flex: 1;
+            text-align: center;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            min-width: 300px;
+        }
+        .video-stream {
+            max-width: 100%;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .heatmap-stream {
+            max-width: 100%;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+        }
+        .counts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .count-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .count-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+        .count-label {
+            color: #666;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        .status {
+            text-align: center;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .refresh-control {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .refresh-control label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .refresh-control input {
+            width: 100px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .heatmap-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .reports-panel {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: none;
+        }
+        .reports-panel.show {
+            display: block;
+        }
+        .reports-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+        }
+        .report-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .report-item:last-child {
+            border-bottom: none;
+        }
+        .report-info {
+            flex: 1;
+        }
+        .report-filename {
+            font-weight: bold;
+            color: #333;
+        }
+        .report-size {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .download-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .download-btn:hover {
+            background-color: #218838;
+        }
+
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Arayüz</h1>
+
+        <div class="controls">
+            <button class="start-btn" onclick="startTracking()">Başlat</button>
+            <button class="stop-btn" onclick="stopTracking()">Durdur</button>
+            <button class="reports-btn" onclick="toggleReports()">Rapor</button>
+        </div>
+
+        <div id="status" class="status"></div>
+
+        <div class="counts">
+            <div class="count-item">
+                <div id="entry-count" class="count-value">0</div>
+                <div class="count-label">Giriş Sayısı</div>
+            </div>
+            <div class="count-item">
+                <div id="exit-count" class="count-value">0</div>
+                <div class="count-label">Çıkış Sayısı</div>
+            </div>
+            <div class="count-item">
+                <div id="running-status" class="count-value">Hayır</div>
+                <div class="count-label">Çalışıyor mu?</div>
+            </div>
+            <div class="count-item">
+                <div id="fps-value" class="count-value">0.0</div>
+                <div class="count-label">FPS</div>
+            </div>
+            <div class="count-item">
+                <div id="frame-count" class="count-value">0</div>
+                <div class="count-label">Frame</div>
+            </div>
+        </div>
+
+        <div class="refresh-control">
+            <label for="refresh-interval">Yenileme aralığı (ms):</label>
+            <input type="number" id="refresh-interval" value="300" min="100" max="2000" step="50">
+        </div>
+
+        <div class="reports-panel" id="reports-panel">
+            <h3>Günlük Rapor</h3>
+            <p>Giriş/Çıkış bilgileri otomatik olarak yazdırılır </p>
+            <div class="reports-list" id="reports-list">
+                <div style="text-align: center; padding: 20px; color: #666;">Loading reports...</div>
+            </div>
+        </div>
+
+        <div class="video-container">
+            <div class="main-video">
+                <img id="video-stream" class="video-stream" alt="Video stream" style="display: none;">
+            </div>
+            <div class="heatmap-panel">
+                <div class="heatmap-title">Isı Haritası</div>
+                <img id="heatmap-stream" class="heatmap-stream" alt="Heatmap stream" style="display: none;">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8000';
+        let refreshInterval;
+        let isRunning = false;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCounts();
+        });
+
+        function showStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+        }
+
+        function toggleReports() {
+            const panel = document.getElementById('reports-panel');
+            panel.classList.toggle('show');
+
+            if (panel.classList.contains('show')) {
+                loadReports();
+            }
+        }
+
+        async function loadReports() {
+            try {
+                const response = await fetch(`${API_URL}/reports`);
+                if (response.ok) {
+                    const data = await response.json();
+                    displayReports(data.reports);
+                } else {
+                    document.getElementById('reports-list').innerHTML =
+                        '<div style="text-align: center; padding: 20px; color: #f44336;">Error loading reports</div>';
+                }
+            } catch (error) {
+                document.getElementById('reports-list').innerHTML =
+                    '<div style="text-align: center; padding: 20px; color: #f44336;">Error loading reports</div>';
+            }
+        }
+
+        function displayReports(reports) {
+            const listElement = document.getElementById('reports-list');
+
+            if (reports.length === 0) {
+                listElement.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">Rapor bulunamadı</div>';
+                return;
+            }
+
+            listElement.innerHTML = reports.map(report => `
+                <div class="report-item">
+                    <div class="report-info">
+                        <div class="report-filename">${report.filename}</div>
+                        <div class="report-size">${formatFileSize(report.size)}</div>
+                    </div>
+                    <button class="download-btn" onclick="downloadReport('${report.filename}')">Download</button>
+                </div>
+            `).join('');
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function downloadReport(filename) {
+            window.open(`${API_URL}/reports/${filename}`, '_blank');
+        }
+
+        async function startTracking() {
+            try {
+                const response = await fetch(`${API_URL}/start`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.started) {
+                        showStatus('Başlatıldı', 'success');
+                        isRunning = true;
+
+                        const videoStream = document.getElementById('video-stream');
+                        const heatmapStream = document.getElementById('heatmap-stream');
+
+                        videoStream.src = `${API_URL}/video`;
+                        heatmapStream.src = `${API_URL}/heatmap-stream`;
+
+                        videoStream.style.display = 'block';
+                        heatmapStream.style.display = 'block';
+
+                        updateCounts();
+                        startRefresh();
+                    } else {
+                        showStatus('Tracking is already running', 'info');
+                    }
+                } else {
+                    showStatus('Failed to start tracking', 'error');
+                }
+            } catch (error) {
+                showStatus('Error starting tracking: ' + error.message, 'error');
+            }
+        }
+
+        async function stopTracking() {
+            try {
+                const response = await fetch(`${API_URL}/stop`, {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.stopped) {
+                        showStatus('Tracking stopped', 'info');
+                        isRunning = false;
+
+                        const videoStream = document.getElementById('video-stream');
+                        const heatmapStream = document.getElementById('heatmap-stream');
+
+                        videoStream.src = '';
+                        heatmapStream.src = '';
+
+                        videoStream.style.display = 'none';
+                        heatmapStream.style.display = 'none';
+
+                        updateCounts();
+                        if (refreshInterval) {
+                            clearInterval(refreshInterval);
+                            refreshInterval = null;
+                        }
+                    } else {
+                        showStatus('Tracking was not running', 'info');
+                    }
+                } else {
+                    showStatus('Failed to stop tracking', 'error');
+                }
+            } catch (error) {
+                showStatus('Error stopping tracking: ' + error.message, 'error');
+            }
+        }
+
+        async function updateCounts() {
+            try {
+                const response = await fetch(`${API_URL}/counts`);
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('entry-count').textContent = data.entry || 0;
+                    document.getElementById('exit-count').textContent = data.exit || 0;
+                    document.getElementById('running-status').textContent = data.running ? 'Evet' : 'Hayır';
+                    document.getElementById('fps-value').textContent = (data.fps || 0).toFixed(1);
+                    document.getElementById('frame-count').textContent = data.frame_count || 0;
+
+                    if (data.running && !isRunning) {
+                        isRunning = true;
+
+                        const videoStream = document.getElementById('video-stream');
+                        const heatmapStream = document.getElementById('heatmap-stream');
+
+                        videoStream.src = `${API_URL}/video`;
+                        heatmapStream.src = `${API_URL}/heatmap-stream`;
+
+                        videoStream.style.display = 'block';
+                        heatmapStream.style.display = 'block';
+
+                    } else if (!data.running && isRunning) {
+                        isRunning = false;
+
+                        const videoStream = document.getElementById('video-stream');
+                        const heatmapStream = document.getElementById('heatmap-stream');
+
+                        videoStream.src = '';
+                        heatmapStream.src = '';
+
+                        videoStream.style.display = 'none';
+                        heatmapStream.style.display = 'none';
+
+                        if (refreshInterval) {
+                            clearInterval(refreshInterval);
+                            refreshInterval = null;
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error updating counts:', error);
+            }
+        }
+
+        function startRefresh() {
+            const interval = document.getElementById('refresh-interval').value;
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+            refreshInterval = setInterval(updateCounts, parseInt(interval));
+        }
+
+        // Update refresh interval when changed
+        document.getElementById('refresh-interval').addEventListener('change', startRefresh);
+    </script>
+</body>
+</html>
